@@ -39,20 +39,18 @@ async def lifespan(app: FastAPI):
     # Startup
     logger.info("🚀 Starting NovaStack API...")
     
-    # Test database connection
-    if await test_connection():
-        logger.info("✅ Database connection successful")
-    else:
-        logger.error("❌ Database connection failed!")
-        raise HTTPException(status_code=500, detail="Database connection failed")
-    
-    # Initialize database tables
+    # Test database connection (gracefully handle missing DB for development)
     try:
-        await init_db()
-        logger.info("✅ Database initialized successfully")
+        if await test_connection():
+            logger.info("✅ Database connection successful")
+            # Initialize database tables
+            await init_db()
+            logger.info("✅ Database initialized successfully")
+        else:
+            logger.warning("⚠️ Database connection failed - running without database")
     except Exception as e:
-        logger.error(f"❌ Database initialization failed: {e}")
-        raise HTTPException(status_code=500, detail="Database initialization failed")
+        logger.warning(f"⚠️ Database not available: {e} - running without database")
+        logger.info("💡 To enable database features, start PostgreSQL with Docker: docker-compose up -d postgres")
     
     logger.info("✅ NovaStack API started successfully!")
     

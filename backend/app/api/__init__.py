@@ -10,13 +10,13 @@ from fastapi import APIRouter
 # Create main API router
 api_router = APIRouter(prefix="/api/v1")
 
-# Import sub-routers (will be created in next steps)
-# from app.api.auth import router as auth_router
+# Import sub-routers
+from app.api.auth import router as auth_router
 # from app.api.projects import router as projects_router
 # from app.api.storage import router as storage_router
 
 # Include sub-routers
-# api_router.include_router(auth_router, prefix="/auth", tags=["authentication"])
+api_router.include_router(auth_router, prefix="/auth", tags=["authentication"])
 # api_router.include_router(projects_router, prefix="/projects", tags=["projects"])
 # api_router.include_router(storage_router, prefix="/storage", tags=["storage"])
 
