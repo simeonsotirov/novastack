@@ -5,7 +5,7 @@ This file sets up SQLAlchemy for async database operations.
 It handles connection pooling and session management.
 """
 
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, MetaData, text
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.pool import StaticPool
@@ -81,7 +81,7 @@ async def test_connection():
     """Test if database connection is working"""
     try:
         async with AsyncSessionLocal() as session:
-            await session.execute("SELECT 1")
+            await session.execute(text("SELECT 1"))
             return True
     except Exception as e:
         print(f"❌ Database connection failed: {e}")
