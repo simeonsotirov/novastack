@@ -17,6 +17,7 @@ import asyncio
 # Import our application components
 from app.core.config import settings
 from app.core.database import init_db, close_db, test_connection
+from app.core.dynamic_router import init_dynamic_router_manager
 from app.api import api_router
 
 # Set up structured logging
@@ -83,6 +84,9 @@ app.add_middleware(
 
 # Include API router
 app.include_router(api_router)
+
+# Initialize dynamic router manager for auto-generated APIs
+dynamic_router_manager = init_dynamic_router_manager(app)
 
 # Request timing middleware
 @app.middleware("http")

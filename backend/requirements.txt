@@ -1,42 +1,42 @@
-# FastAPI and core dependencies
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
+# Core FastAPI framework and ASGI server
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
 
-# Database drivers
-asyncpg==0.29.0          # PostgreSQL async driver
-aiomysql==0.2.0          # MySQL async driver
-sqlalchemy==2.0.23       # ORM
-alembic==1.13.0          # Database migrations
+# Data validation and serialization with email support
+pydantic[email]>=2.12.3
+pydantic-settings>=2.1.0
+email-validator>=2.3.0
 
-# Authentication & Security
-python-jose[cryptography]==3.3.0  # JWT tokens
-passlib[bcrypt]==1.7.4            # Password hashing
-python-multipart==0.0.6           # Form parsing
+# Database support - PostgreSQL async
+sqlalchemy[asyncio]>=2.0.23
+asyncpg>=0.30.0
+alembic>=1.13.0
 
-# API enhancements  
-strawberry-graphql[fastapi]==0.214.0  # GraphQL
-python-socketio==5.10.0               # WebSocket/SocketIO
+# Authentication and security
+pyjwt[crypto]>=2.8.0      # JWT token handling
+passlib[bcrypt]>=1.7.4    # Password hashing
+python-multipart>=0.0.6   # Form data parsing
 
-# Storage & Files
-boto3==1.34.0            # S3/MinIO client
-python-magic==0.4.27     # File type detection
+# Docker container management
+docker>=7.1.0
+pywin32>=311              # Windows Docker support
 
-# Caching & Background Tasks
-redis==5.0.1             # Redis client
-celery==5.3.4            # Background tasks
+# HTTP client and testing
+httpx>=0.28.1
 
-# Monitoring & Logging
-prometheus-client==0.19.0  # Metrics
-structlog==23.2.0          # Structured logging
+# Environment and configuration
+python-dotenv>=1.0.0
 
-# HTTP client
-httpx==0.25.2
+# Development and testing tools
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
 
-# Development tools
-pytest==7.4.3
-pytest-asyncio==0.21.1
-black==23.11.0
-isort==5.12.0
-mypy==1.7.1
+# Additional utilities
+python-dateutil>=2.8.2
+typing-extensions>=4.15.0
+
+# Future expansion (commented out for now)
+# strawberry-graphql[fastapi]>=0.214.0  # GraphQL
+# boto3>=1.34.0                         # S3/MinIO storage
+# redis>=5.0.1                          # Caching
+# celery>=5.3.4                         # Background tasks
